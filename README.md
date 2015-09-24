@@ -1,1 +1,1 @@
-# studentsdb
+# studentsdb - django test project
