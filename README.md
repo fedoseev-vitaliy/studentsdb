@@ -1,1 +1,0 @@
-# studentsdb - django test project
