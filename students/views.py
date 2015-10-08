@@ -6,7 +6,24 @@ from django.http import HttpResponse
 
 
 def students_list(request):
-    return render(request, 'students/students_list.html', {})
+    students=(
+        {'id':1,
+         'first_name': u'Olena',
+         'last_name': u'Fedosieieva',
+         'ticket':123,
+         'image': 'img/olena.jpg'},
+        {'id':2,
+         'first_name': u'Yarik',
+         'last_name': u'Kovalchuk',
+         'ticket':124,
+         'image': 'img/yarik.jpg'},
+        {'id':3,
+         'first_name': u'Vitalii',
+         'last_name': u'Fedosieiev',
+         'ticket':125,
+         'image': 'img/me.jpg'},)
+    
+    return render(request, 'students/students_list.html', {'students':students})
 
 
 def students_add(request):
