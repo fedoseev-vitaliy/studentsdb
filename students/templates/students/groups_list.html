@@ -1,0 +1,76 @@
+{% extends "students/base.html"%}
+
+{% load static from staticfiles %}
+
+{% block meta_title %}Студенти{% endblock meta_title %}
+
+{% block title %}
+	<div>
+		<div class="col-xs-10">	
+			<h2>Группи</h2>
+		</div>
+			
+		<!-- Add Students Button -->
+		<div class="col-xs-2">
+			<a class="btn btn-primary" href="{% url 'groups_add' %}">Додати Групу</a>	
+		</div>
+	</div>	
+{% endblock title %}
+
+{% block content %}				
+	<div class="col-xs-12" id="content-columns">
+		<!-- Start Groups Listing -->
+		<div>
+			<table class="table table-hover table-striped">
+	
+				<thead>
+				<tr>
+					<th><a href="#">№</a></th>					
+					<th><a href="#">Назва &uarr;</a></th>
+					<th><a href="#">Староста</a></th>					
+					<th>Дії</th>
+				</tr>
+				</thead>
+	
+				<tbody>
+				{% for group in groups %}
+					<tr>
+						<td>{{ forloop.counter }}</td>						
+						<td><a title="Редагувати" href="{% url 'groups_edit' group.id %}">{{ group.name }}</a></td>
+						<td><a title="Редагувати" href="{% url 'groups_edit' group.id %}">{{ group.starosta }}</a></td>						
+						<td>
+							<div class="dropdown">
+	
+								<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+										Дія <span class="caret"></span>
+								</button>
+	
+								<ul class="dropdown-menu" role="menu">
+	
+									<li role="presentation">
+										<a role="menuitem" tabindex="-1" href="{% url 'journal_group_view' group.id %}">Відвідування</a>
+									</li>
+	
+									<li role="presentation">
+										<a role="menuitem" tabindex="-1" href="{% url 'groups_edit' group.id %}">Редагувати</a>
+									</li>
+	
+									<li role="presentation">
+										<a role="menuitem" tabindex="-1" href="{% url 'groups_delete' group.id %}">Видалити</a>
+									</li>
+	
+								</ul>	
+							</div>
+						</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>	
+	
+			{% include 'students/pagination.html' %}								
+		</div>
+		<!-- End Groups Listing -->
+	</div>
+{% endblock content %}
+		
+
