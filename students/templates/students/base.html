@@ -11,7 +11,7 @@
 
 		<!-- Include Styles -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-		<link rel="stylesheet" href="{% static 'css/main.css' %}">
+		<link rel="stylesheet" href="{{ PORTAL_URL }}{% static 'css/main.css' %}">
 		{% block extra_css %}{% endblock extra_css %}
 		
 	</head>
@@ -26,7 +26,7 @@
 
 				<!-- Logo -->
 				<div class="col-xs-8">
-					<h1>Сервіс Обліку Студентів</h1>
+					{% block logo_title %}<h1>Сервіс Обліку Студентів</h1>{% endblock logo_title %}
 				</div>
 
 				<!-- Group Selector -->
@@ -44,20 +44,26 @@
 			</div>
 			<!-- End Header -->
 
+
+			{% block menu %}
 			<!-- Start SubHeader -->
 			<div class="row" id="sub-header">
 				<div class="col-xs-12">
-					<ul class="nav nav-tabs" role="tablist">						
-						<li role="presentation" class="active">
-							<a href="{% url 'home' %}">Студенти</a>
+					<ul class="nav nav-tabs" role="tablist">	
+					
+						{% url 'home' as home_url %}					
+						<li role="presentation" {% if request.path == home_url %} class="active" {% endif %}>
+							<a href="{{ home_url }}">Студенти</a>
 						</li>
-
-						<li role="presentation">
-							<a href="/journal/">Відвідування</a>
+						
+						{% url 'journals' as journal_url %}
+						<li role="presentation" {% if journal_url in request.path %} class="active" {% endif %}>
+							<a href="{{ journal_url }}">Відвідування</a>
 						</li>
-
-						<li role="presentation">
-							<a href="{% url 'groups' %}">Групи</a>
+						
+						{% url 'groups' as group_url %}
+						<li role="presentation" {% if group_url in request.path %} class="active" {% endif %}>
+							<a href="{{ group_url }}">Групи</a>
 						</li>
 
 					</ul>
@@ -65,6 +71,8 @@
 				</div>
 			</div>
 			<!-- End SubHeader -->
+			{% endblock menu %}
+
 
 			<!-- Start Content Columns -->
 			<div class="row" id="content-columns">
@@ -83,6 +91,7 @@
 			<!-- End Content Columns -->
 			
 			
+			{% block footer %}
 			<!-- Start Footer -->
 			<div class="row" id="footer">
 				<div class="col-xs-12">
@@ -90,9 +99,12 @@
 				</div>
 			</div>
 			<!-- End Footer -->
-
+			{% endblock footer %}
+			
+			
 		</div>
 		<!-- End Container -->		
+
 
 		<!-- Javascripts Section -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
