@@ -1,6 +1,7 @@
 from django.conf.urls import include, url
 from django.contrib import admin
 from students.views import students_view, groups_view, journals_view
+from settings import DEBUG, MEDIA_ROOT
 
 
 urlpatterns = [
@@ -28,4 +29,14 @@ urlpatterns = [
     
     #Admin urls             
     url(r'^admin/', include(admin.site.urls)),
+]
+
+
+
+
+if DEBUG:
+    #serve files from media root
+    urlpatterns += [
+    
+        url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': MEDIA_ROOT}),
 ]

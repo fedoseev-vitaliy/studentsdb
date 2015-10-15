@@ -1,27 +1,31 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
-
+from ..models import Student
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Students Views
 
 
 def students_list(request):
-    students=(
-        {'id':1,
-         'first_name': u'Olena',
-         'last_name': u'Fedosieieva',
-         'ticket': 123,
-         'image': 'img/olena.jpg'},
-        {'id':2,
-         'first_name': u'Yarik',
-         'last_name': u'Kovalchuk',
-         'ticket': 124,
-         'image': 'img/yarik.jpg'},
-        {'id':3,
-         'first_name': u'Vitalii',
-         'last_name': u'Fedosieiev',
-         'ticket': 125,
-         'image': 'img/me.jpg'},)
+    students = Student.objects.all()
+    
+    #try to order students list
+    order_by = request.GET.get('order_by', '')
+    if order_by in ('first_name', 'last_name', 'ticket', 'pk'):
+        students = students.order_by(order_by)
+        if request.GET.get('reverse', '') == '1':
+            students = students.reverse()
+    
+    #paginate students
+    paginator = Paginator(students, 3)
+    page = request.GET.get('page')
+    try:
+        students = paginator.page(page)
+    except PageNotAnInteger:
+        #if page not integer, render first page
+        students = paginator.page(1)
+    except EmptyPage:
+        #if page out of range, return last page
+        students = paginator.page(paginator.num_pages)
     
     return render(request, 'students/students_list.html', {'students':students})
 

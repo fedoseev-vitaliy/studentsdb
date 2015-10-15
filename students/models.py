@@ -9,8 +9,7 @@ class Student(models.Model):
     class Meta(object):
         verbose_name = u'Студент'
         verbose_name_plural = u'Студенти'
-        
-        
+                
     
     first_name = models.CharField(max_length=256, blank=False, verbose_name=u'Имя')
     last_name = models.CharField(max_length=256, blank=False, verbose_name=u'Призвище')

@@ -53,7 +53,7 @@
 					
 						{% url 'home' as home_url %}					
 						<li role="presentation" {% if request.path == home_url %} class="active" {% endif %}>
-							<a href="{{ home_url }}">Студенти</a>
+							<a href="{{ home_url }}?order_by=last_name">Студенти</a>
 						</li>
 						
 						{% url 'journals' as journal_url %}
