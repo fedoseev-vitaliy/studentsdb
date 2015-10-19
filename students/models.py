@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
-from django.template.defaultfilters import default
 
 class Student(models.Model):
     """ Student model """
