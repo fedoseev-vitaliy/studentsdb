@@ -106,11 +106,11 @@
 				{% endfor %}
 				</tbody>
 			</table>	
-	
+			<a class="btn btn-primary" id="load_more">Завантажити ще...</a>
 			{% include 'students/pagination.html' %}						
 		</div>
 		<!-- End Students Listing -->
 	</div>
 {% endblock content %}
 		
-
+{% block extra_js %}<script src="{{ PORTAL_URL }}{% static 'js/page_ajax.js' %}"></script>{% endblock extra_js %}
