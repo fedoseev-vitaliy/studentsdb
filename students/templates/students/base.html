@@ -63,7 +63,7 @@
 						
 						{% url 'groups' as group_url %}
 						<li role="presentation" {% if group_url in request.path %} class="active" {% endif %}>
-							<a href="{{ group_url }}">Групи</a>
+							<a href="{{ group_url }}?order_by=title"">Групи</a>
 						</li>
 
 					</ul>

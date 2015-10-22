@@ -26,7 +26,7 @@ $(document).ready(function(){
 					for (tr=1; tr <= parsed_html.length; tr++){						
 						if (parsed_html[tr] !== undefined){
 							var tr_item = parsed_html[tr].outerHTML;
-							$tbody.append($(tr_item).hide().fadeIn(1000));
+							$tbody.append($(tr_item).hide().fadeIn(2000));
 						}
 						
 					}

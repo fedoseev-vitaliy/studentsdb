@@ -25,7 +25,8 @@
 				{% with order_by=request.GET.order_by reverse=request.GET.reverse %}
 				<thead>
 				<tr>
-					<th><a href="{% url 'home' %}?order_by=pk{% if order_by == 'pk' and reverse != '1' %}&amp;reverse=1{% endif %}">
+					<th>
+						<a href="{% url 'home' %}?order_by=pk{% if order_by == 'pk' and reverse != '1' %}&amp;reverse=1{% endif %}">
 						№
 						{% if order_by == 'pk' and reverse != '1' %}
 							&uarr;
@@ -35,7 +36,8 @@
 						</a>
 					</th>
 					<th>Фото</th>
-					<th><a href="{% url 'home' %}?order_by=first_name{% if order_by == 'first_name' and reverse != '1' %}&amp;reverse=1{% endif %}">
+					<th>
+						<a href="{% url 'home' %}?order_by=first_name{% if order_by == 'first_name' and reverse != '1' %}&amp;reverse=1{% endif %}">
 						Ім'я
 						{% if order_by == 'first_name' and reverse != '1' %}
 							&uarr;
@@ -110,9 +112,9 @@
 			
 			<!-- {% include 'students/pagination.html' %} -->						
 		</div>
-			
+		
 		<!-- End Students Listing -->
-	</div>
+	</div>	
 {% endblock content %}
 		
 {% block extra_js %}<script src="{{ PORTAL_URL }}{% static 'js/page_ajax.js' %}"></script>{% endblock extra_js %}
