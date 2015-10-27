@@ -1,5 +1,6 @@
 from django.contrib import admin
-from students.models import Student, Groups
+from students.models.student import Student
+from students.models.group import Groups
 
 #models tuple
 models = (Student, Groups)

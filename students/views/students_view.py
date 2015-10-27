@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from ..models import Student
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-#from ..my_paginator import MyPaginator, PageNotAnInteger, EmptyPage
+from ..models.student import Student
+#from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from ..my_paginator import MyPaginator, PageNotAnInteger, EmptyPage
 # Students Views
 
 
@@ -17,7 +17,7 @@ def students_list(request):
             students = students.reverse()
     
     #paginate students
-    paginator = Paginator(students, 10)
+    paginator = MyPaginator(students, 10)
     page = request.GET.get('page')
     try:
         students = paginator.page(page)
