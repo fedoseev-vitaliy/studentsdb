@@ -63,7 +63,12 @@
 						
 						{% url 'groups' as group_url %}
 						<li role="presentation" {% if group_url in request.path %} class="active" {% endif %}>
-							<a href="{{ group_url }}?order_by=title"">Групи</a>
+							<a href="{{ group_url }}?order_by=title">Групи</a>
+						</li>
+						
+						{% url 'exams' as exam_url %}
+						<li role="presentation" {% if exam_url in request.path %} class="active" {% endif %}>
+							<a href="{{ exam_url }}?order_by=exam_name">Іспити</a>
 						</li>
 
 					</ul>

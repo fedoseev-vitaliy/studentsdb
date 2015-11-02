@@ -9,7 +9,7 @@ class Student(models.Model):
         verbose_name = u'Студент'
         verbose_name_plural = u'Студенти'
        
-    first_name = models.CharField(max_length=256, blank=False, verbose_name=u'Имя')
+    first_name = models.CharField(max_length=256, blank=False, verbose_name=u'Імя')
     last_name = models.CharField(max_length=256, blank=False, verbose_name=u'Призвище')
     middle_name = models.CharField(max_length=256, blank=True, verbose_name=u'По-батькові', default='')
     birth_day = models.DateField(blank=False, verbose_name=u'Дата народження', null=True)

@@ -1,6 +1,7 @@
 from django.conf.urls import include, url
 from django.contrib import admin
-from students.views import students_view, groups_view, journals_view
+from students.views import students_view, groups_view, journals_view,\
+    examination_view
 from settings import DEBUG, MEDIA_ROOT
 
 
@@ -25,6 +26,11 @@ urlpatterns = [
     url(r'^journal/$', journals_view.journals_list, name="journals"),
     url(r'^journal/student/(?P<sid>\d+)/view/$', journals_view.journal_student_view, name="journal_student_view"),
     url(r'^journal/group/(?P<sid>\d+)/view/$', journals_view.journal_group_view, name="journal_group_view"),
+    
+    
+    # Exam url
+    url(r'^exam/$', examination_view.exam_list, name="exams"),
+    
     
     
     #Admin urls             

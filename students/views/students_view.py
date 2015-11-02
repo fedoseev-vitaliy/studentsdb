@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from ..models.student import Student
-#from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from ..my_paginator import MyPaginator, PageNotAnInteger, EmptyPage
 # Students Views
 
