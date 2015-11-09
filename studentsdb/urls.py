@@ -29,7 +29,8 @@ urlpatterns = [
     
     
     # Exam url
-    url(r'^exam/$', examination_view.exam_list, name="exams"),
+    url(r'^exam/$', examination_view.exam_list, name="exams"),    
+    url(r'^exam/group/(?P<sid>\d+)/view/$', examination_view.exam_group_result, name="group_result"),
     
     
     

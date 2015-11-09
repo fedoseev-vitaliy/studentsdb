@@ -27,5 +27,6 @@ def exam_list(request):
     return render(request, 'students/exams_list.html', {'exams' : exams})
 
 
-def exam_result(request):
-    return HttpResponse('<h1>Exam result</h1>')
+
+def exam_group_result(request, sid):
+    return HttpResponse('<h1>Group %s result</h1>' % sid)

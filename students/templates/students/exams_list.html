@@ -69,7 +69,7 @@
 						<td>{{ exam.exam_name }}</td>
 						<td>{{ exam.exam_date }}</td>
 						<td>{{ exam.teacher_name }}</td>
-						<td>{{ exam.student_group }}</td>						
+						<td><a href={% url 'group_result' exam.student_group.id %}>{{ exam.student_group }}</a></td>						
 					</tr>
 				{% endfor %}
 				</tbody>
