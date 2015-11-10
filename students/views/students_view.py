@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from ..models.student import Student
+from ..models.group import Groups
 from ..my_paginator import MyPaginator, PageNotAnInteger, EmptyPage
 # Students Views
 
@@ -29,7 +30,7 @@ def students_list(request):
 
 
 def students_add(request):
-    return HttpResponse('<h1>Student add form</h1>')
+    return render(request, 'students/students_add.html', {'groups': Groups.objects.all().order_by('title')})
 
 
 def students_edit(request, sid):

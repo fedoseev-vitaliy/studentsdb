@@ -1,0 +1,113 @@
+{% extends "students/base.html"%}
+
+{% load static from staticfiles %}
+
+{% block meta_title %}Студенти{% endblock meta_title %}
+
+{% block title %}
+	<div>
+		<div class="col-xs-10">	
+			<h2>База Студентів</h2>
+		</div>
+			
+		<!-- Add Students Button -->
+		<div class="col-xs-2">
+			<a class="btn btn-primary" href="{% url 'students_add' %}">Додати Студента</a>	
+		</div>
+	</div>	
+{% endblock title %}
+
+{% block content %}				
+	<form action="{% url 'students_add' %}" method="post" 
+	      enctype="multipart/form-data" class="form-horizontal">					
+		<div class="col-sm-12">
+			<div class="form-group">					
+				<label for="name" class="col-sm-2 control-label">Ім'я</label>
+				<div class="col-sm-4">
+  					<input class="form-control" id="name" placeholder="Ім'я">
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-12">
+			<div class="form-group">	    			
+				<label class="col-sm-2 control-label" for="father-name">По-батькові</label>
+				<div class="col-sm-4">
+					<input class="form-control" id="father-name" placeholder="По-батькові">
+				</div>    					
+			</div>
+		</div>
+
+
+		<div class="col-sm-12">
+			<div class="form-group">				
+				<label class="col-sm-2 control-label" for="surname">Призвище</label>
+				<div class="col-sm-4">
+					<input class="form-control" id="surname" placeholder="Призвище">
+				</div>    					
+			</div>
+		</div>
+
+		<div class="col-sm-12">
+			<div class="form-group">    				
+				<label class="col-sm-2 control-label" for="ticket">№ Білету</label>
+				<div class="col-sm-4">
+					<input class="form-control" id="ticket" placeholder="123">
+				</div>    				
+			</div>
+		</div>
+
+		<div class="col-sm-12">
+			<div class="form-group">    				
+				<label class="col-sm-2 control-label" for="birth_date">Дата народження</label>
+				<div class="col-sm-4">
+					<input class="form-control" id="birth_date" placeholder="12-10-1987">
+				</div>    					
+			</div>
+		</div>
+
+		<div class="col-sm-12">
+			<div class="form-group">    				
+				<label class="col-sm-2 control-label" for="photo">Фото</label>
+				<div class="col-sm-4" id="photo">
+					<p><h8>Наразі: <a href="#">image.jpg</a></h8></p>
+					<p><h8>Очистити</h8></p>
+					<input type="file">
+				</div>    				
+			</div>
+		</div>	
+
+		<div class="col-sm-12">
+			<div class="form-group">    				
+				<label class="col-sm-2 control-label" for="group">Група</label>
+				<div class="col-sm-4">
+					<select class="form-control" id="group">
+						{% for group in groups %}
+					 	<option value="{{ group.id }}">{{ group.title }}</option>							
+						{% endfor %}						  
+					</select>
+				</div>    				
+			</div>
+		</div>
+
+		<div class="col-sm-12">
+			<div class="form-group">    				
+				<label class="col-sm-2 control-label" for="notes">Додаткові нотатки</label>
+				<div class="col-sm-4">
+					<textarea class="form-control" rows="3" placeholder="нотатки" style="resize:none;" id="notes"></textarea>
+				</div>    				
+			</div>
+		</div>
+
+		<div class="col-sm-12">	    			   				
+			<div class="form-group">
+			    <div class="col-sm-offset-2 col-sm-10">					    	
+		     		<button type="link" class="btn btn-primary btn-lg">Save</button>
+		     		<button type="link" class="btn btn-primary btn-lg">Cancel</button>					     	
+			    </div>	
+			</div>				 			
+		</div>		
+	</form>		
+{% endblock content %}
+		
+{% block extra_js %}<script src="{{ PORTAL_URL }}{% static 'js/page_ajax.js' %}"></script>{% endblock extra_js %}
