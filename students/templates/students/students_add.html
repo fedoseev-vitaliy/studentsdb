@@ -19,21 +19,23 @@
 
 {% block content %}				
 	<form action="{% url 'students_add' %}" method="post" 
-	      enctype="multipart/form-data" class="form-horizontal">					
+	      enctype="multipart/form-data" class="form-horizontal">		
+	    {% csrf_token %}			
 		<div class="col-sm-12">
 			<div class="form-group">					
-				<label for="name" class="col-sm-2 control-label">Ім'я</label>
+				<label for="first_name" class="col-sm-2 control-label">Ім'я*</label>
 				<div class="col-sm-4">
-  					<input class="form-control" id="name" placeholder="Ім'я">
+  					<input class="form-control" id="first_name" name="first_name" placeholder="Ім'я">  					
 				</div>
+				<span class='help-block'>{{ errors.first_name }}</span>
 			</div>
 		</div>
 
 		<div class="col-sm-12">
 			<div class="form-group">	    			
-				<label class="col-sm-2 control-label" for="father-name">По-батькові</label>
+				<label class="col-sm-2 control-label" for="middle_name">По-батькові</label>
 				<div class="col-sm-4">
-					<input class="form-control" id="father-name" placeholder="По-батькові">
+					<input class="form-control" id="middle_name" name="middle_name" placeholder="По-батькові">					
 				</div>    					
 			</div>
 		</div>
@@ -41,52 +43,55 @@
 
 		<div class="col-sm-12">
 			<div class="form-group">				
-				<label class="col-sm-2 control-label" for="surname">Призвище</label>
+				<label class="col-sm-2 control-label" for="last_name">Прізвище*</label>
 				<div class="col-sm-4">
-					<input class="form-control" id="surname" placeholder="Призвище">
+					<input class="form-control" id="last_name" name="last_name" placeholder="Призвище">					
 				</div>    					
+				<span class='help-block'>{{ errors.last_name }}</span>
 			</div>
 		</div>
 
 		<div class="col-sm-12">
 			<div class="form-group">    				
-				<label class="col-sm-2 control-label" for="ticket">№ Білету</label>
+				<label class="col-sm-2 control-label" for="ticket">№ Білету*</label>
 				<div class="col-sm-4">
-					<input class="form-control" id="ticket" placeholder="123">
+					<input class="form-control" id="ticket" name="ticket" placeholder="123">					
 				</div>    				
+				<span class='help-block'>{{ errors.ticket }}</span>
 			</div>
 		</div>
 
 		<div class="col-sm-12">
 			<div class="form-group">    				
-				<label class="col-sm-2 control-label" for="birth_date">Дата народження</label>
+				<label class="col-sm-2 control-label" for="birth_day">Дата народження*</label>
 				<div class="col-sm-4">
-					<input class="form-control" id="birth_date" placeholder="12-10-1987">
+					<input class="form-control" id="birth_day" name="birth_day" placeholder="12-10-1987">					
 				</div>    					
+				<span class='help-block'>{{ errors.birth_day }}</span>
 			</div>
 		</div>
 
 		<div class="col-sm-12">
 			<div class="form-group">    				
 				<label class="col-sm-2 control-label" for="photo">Фото</label>
-				<div class="col-sm-4" id="photo">
-					<p><h8>Наразі: <a href="#">image.jpg</a></h8></p>
-					<p><h8>Очистити</h8></p>
-					<input type="file">
+				<div class="col-sm-4">
+					<input type="file" value="" id="photo" name="photo">
 				</div>    				
 			</div>
 		</div>	
 
 		<div class="col-sm-12">
 			<div class="form-group">    				
-				<label class="col-sm-2 control-label" for="group">Група</label>
+				<label class="col-sm-2 control-label" for="student_group">Група*</label>
 				<div class="col-sm-4">
-					<select class="form-control" id="group">
+					<select class="form-control" id="student_group" name="student_group">
+						<option value="">Виберіть групу</option>
 						{% for group in groups %}
 					 	<option value="{{ group.id }}">{{ group.title }}</option>							
 						{% endfor %}						  
-					</select>
-				</div>    				
+					</select>					
+				</div>    	
+				<span class='help-block'>{{ errors.student_group }}</span>			
 			</div>
 		</div>
 
@@ -94,7 +99,7 @@
 			<div class="form-group">    				
 				<label class="col-sm-2 control-label" for="notes">Додаткові нотатки</label>
 				<div class="col-sm-4">
-					<textarea class="form-control" rows="3" placeholder="нотатки" style="resize:none;" id="notes"></textarea>
+					<textarea class="form-control" rows="3" placeholder="нотатки" style="resize:none;" id="notes" name="notes"></textarea>
 				</div>    				
 			</div>
 		</div>
@@ -102,12 +107,10 @@
 		<div class="col-sm-12">	    			   				
 			<div class="form-group">
 			    <div class="col-sm-offset-2 col-sm-10">					    	
-		     		<button type="link" class="btn btn-primary btn-lg">Save</button>
-		     		<button type="link" class="btn btn-primary btn-lg">Cancel</button>					     	
+		     		<button type="link" class="btn btn-primary btn-lg" id="add_button" name="add_button">Save</button>
+		     		<button type="link" class="btn btn-primary btn-lg" id="cancel_button" name="cancel_button">Cancel</button>					     	
 			    </div>	
 			</div>				 			
 		</div>		
 	</form>		
 {% endblock content %}
-		
-{% block extra_js %}<script src="{{ PORTAL_URL }}{% static 'js/page_ajax.js' %}"></script>{% endblock extra_js %}
