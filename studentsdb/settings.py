@@ -68,6 +68,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'studentsdb.context_processors.students_proc',
+                'studentsdb.context_processors.message_collection',                
             ],
         },
     },
@@ -82,7 +83,7 @@ DATABASES = DB
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'uk'
 
 TIME_ZONE = 'UTC'
 
@@ -95,4 +96,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
+
 MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
+
+ADMIN_EMAIL = 'fedoseevvt@gmail.com'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'fedoseevvt@gmail.com'
+EMAIL_HOST_PASSWORD = 'fedyakievua@87'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
