@@ -90,7 +90,9 @@
 					{% block status_message %}
 						{% if messages %}
 							{% for message in messages %}
-								<div class="alert alert-warning" role="alert">{{ message }}</div>
+								<div class="alert alert-{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}danger
+								                        {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}success 
+								                        {% else %}warning{% endif %}" role="alert">{{ message }}</div>
 							{% endfor %}
 						{% endif %}
 					{% endblock status_message %}
