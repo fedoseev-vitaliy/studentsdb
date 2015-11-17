@@ -34,9 +34,11 @@
 					<strong>Група:</strong>
 
 					<select>
-						<option value="">Усі групи</option>
+
+						<option value="">Усі Студенти</option>
 						<option value="">Мтм - 21б Віталій Федосеев (№ 254)</option>
 						<option value="">Мтм - 21б Олена Федосеева (№ 255)</option>
+
 					</select>					
 				</div>
 			</div>
@@ -68,11 +70,6 @@
 						<li role="presentation" {% if exam_url in request.path %} class="active" {% endif %}>
 							<a href="{{ exam_url }}?order_by=exam_name">Іспити</a>
 						</li>
-						
-						{% url 'contact_admin' as contact_url %}
-						<li role="presentation" {% if contact_url in request.path %} class="active" {% endif %}>
-							<a href="{{ contact_url }}">Контакти</a>
-						</li>
 
 					</ul>
 					
@@ -86,6 +83,7 @@
 			<div class="row" id="content-columns">
 				<div class="col-xs-12" id="content-column">	
 			
+<<<<<<< HEAD
 					<!-- Start Status Message content -->
 					{% block status_message %}
 						{% if messages %}
@@ -97,6 +95,13 @@
 						{% endif %}
 					{% endblock status_message %}
 					<!-- End Status Message content -->
+=======
+					{% comment "Not used alert so far" %}
+					<div class="alert alert-warning" role="alert">
+						Status Update!
+					</div>
+					{% endcomment %}
+>>>>>>> parent of 5119db2... added form warnning and implement django messages use
 					
 					<h2>{% block title %}{% endblock title %}</h2>
 					{% block content %}{% endblock content %}

@@ -69,7 +69,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'studentsdb.context_processors.students_proc',
-                'studentsdb.context_processors.message_collection',                
             ],
         },
     },
@@ -84,7 +83,7 @@ DATABASES = DB
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'uk'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
@@ -97,8 +96,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
-
 MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
+<<<<<<< HEAD
 
 ADMIN_EMAIL = 'fedoseevvt@gmail.com'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -108,3 +107,5 @@ EMAIL_PORT = 465
 EMAIL_USE_SSL = True
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+=======
+>>>>>>> parent of 5119db2... added form warnning and implement django messages use
