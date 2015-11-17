@@ -103,7 +103,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
 ADMIN_EMAIL = 'fedoseevvt@gmail.com'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'fedoseevvt@gmail.com'
-EMAIL_HOST_PASSWORD = '***********'
+EMAIL_HOST_PASSWORD = '**********'
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
 

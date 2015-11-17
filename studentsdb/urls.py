@@ -1,9 +1,7 @@
 from django.conf.urls import include, url
 from django.contrib import admin
-from students.views import students_view, groups_view, journals_view,\
-    examination_view, contact_admin
+from students.views import students_view, groups_view, journals_view, examination_view, contact_admin
 from settings import DEBUG, MEDIA_ROOT
-
 
 
 urlpatterns = [
@@ -34,7 +32,7 @@ urlpatterns = [
     url(r'^exam/group/(?P<sid>\d+)/view/$', examination_view.exam_group_result, name="group_result"),
     
     # Contact admin url
-    url(r'^contact/$', contact_admin.contact_admin, name="contact_admin"),
+    url(r'^contact/$', contact_admin.ContacAdminView.as_view(), name="contact_admin"),
     
     #Admin urls             
     url(r'^admin/', include(admin.site.urls)),
