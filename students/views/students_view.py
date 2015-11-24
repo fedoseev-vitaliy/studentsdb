@@ -9,9 +9,11 @@ from datetime import datetime
 from PIL import Image
 from django.contrib import messages 
 from django.contrib.messages.api import get_messages
+from django.views.generic import UpdateView, DeleteView
+from students.forms import student_form
+from django.views.generic.edit import CreateView
+
 # Students Views
-
-
 def students_list(request):
     students = Student.objects.all()
     
@@ -123,9 +125,53 @@ def students_add(request):
         return render(request, 'students/students_add.html', {'groups': Groups.objects.all().order_by('title')})
 
 
-def students_edit(request, sid):
-    return HttpResponse('<h1>Student edit %s</h1>' % sid)
+class StudentUpdateView(UpdateView):
+    model = Student    
+    template_name = 'forms/students_edit_form.html'
+    form_class = student_form.StudentUpdateForm
+    pk_url_kwarg = 'sid'       
+    
+    def get_success_url(self):
+        messages.success(self.request, u'Студента успішно збережено!')
+        return reverse('home')
+    
+    def post(self, request, *args, **kwargs):
+        if request.POST.get('cancel_button', None):
+            messages.warning(request, u'Редагування студента відмінено!')
+            return HttpResponseRedirect(reverse('home'))
+        else:
+            return UpdateView.post(self, request, *args, **kwargs)
 
 
-def students_delete(request, sid):
-    return HttpResponse('<h1>Student delete %s</h1>' % sid)
+class StudentsAddView(CreateView):
+    model = Student    
+    template_name = 'forms/students_add_form.html'
+    form_class = student_form.StudentAddForm         
+    
+    
+    def get_success_url(self):
+        messages.success(self.request, u'Студента {} {} успішно додано!'.format(self.request.POST.get('first_name'), self.request.POST.get('last_name')))
+        return reverse('home')
+    
+    
+    def form_invalid(self, form):
+        if self.request.POST.get('cancel_button', None):
+            messages.warning(self.request, u'Додавання студента відмінено!')
+            return HttpResponseRedirect(reverse('home'))
+        else:
+            return CreateView.form_invalid(self, form)
+    
+    
+    def post(self, request, *args, **kwargs):
+        return CreateView.post(self, request, *args, **kwargs)
+
+
+class StudentsDeleteView(DeleteView):
+    model = Student
+    template_name = 'forms/students_delete_form.html'
+    pk_url_kwarg = 'sid' 
+    
+    def get_success_url(self):
+        messages.success(self.request, u'Студента успішно видалено!')
+        return reverse('home')
+

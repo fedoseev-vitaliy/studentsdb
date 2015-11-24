@@ -4,7 +4,7 @@ from django.views.generic.edit import FormView
 from ..forms import contact_admin_form
 
 class ContacAdminView(FormView):
-    template_name = 'contact_admin/form.html'
+    template_name = 'forms/form.html'
     form_class = contact_admin_form.ContactAdminForm
     success_url = '/contact/'
     

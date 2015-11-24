@@ -9,9 +9,9 @@ urlpatterns = [
                
     #Students url
     url(r'^$', students_view.students_list, name='home'),
-    url(r'^students/add/$', students_view.students_add, name='students_add'),
-    url(r'^students/(?P<sid>\d+)/edit/$', students_view.students_edit, name='students_edit'),
-    url(r'^students/(?P<sid>\d+)/delete/$', students_view.students_delete, name='students_delete'),
+    url(r'^students/add/$', students_view.StudentsAddView.as_view(), name='students_add'),
+    url(r'^students/(?P<sid>\d+)/edit/$', students_view.StudentUpdateView.as_view(), name='students_edit'),
+    url(r'^students/(?P<sid>\d+)/delete/$', students_view.StudentsDeleteView.as_view(), name='students_delete'),
     
     
     #Group url    

@@ -3,7 +3,7 @@
 {% load static from staticfiles %}
 {% load crispy_forms_tags %}
 
-{% block meta_title %}Зв'язок із адміністратором{% endblock meta_title %}
+{% block meta_title %}{% endblock meta_title %}
 
 <!-- Start Status Message content -->
 {% block status_message %}
@@ -15,8 +15,9 @@
 {% endblock status_message %}
 <!-- End Status Message content -->
 
-{% block title %}Зв'язок із адміністратором{% endblock title %}
+{% block title %}{% endblock title %}
 
 {% block content %}	
-	{% crispy form %}
+	{% crispy form %}	
+	<br>
 {% endblock content %}

@@ -2,7 +2,7 @@
 
 {% load static from staticfiles %}
 
-{% block meta_title %}Студенти{% endblock meta_title %}
+{% block meta_title %}Групи{% endblock meta_title %}
 
 {% block title %}
 	<div>
@@ -63,7 +63,7 @@
 					<tr>
 						<td>{{ group.id }}</td>						
 						<td><a title="Редагувати" href="{% url 'groups_edit' group.id %}">{{ group.title }}</a></td>
-						<td><a title="Редагувати" href="{% url 'groups_edit' group.id %}">{{ group.leader }}</a></td>						
+						<td><a title="Редагувати" href="{% url 'groups_edit' group.id %}">{{ group.leader|default_if_none:"Староста відсутній" }}</a></td>						
 						<td>
 							<div class="dropdown">
 	
