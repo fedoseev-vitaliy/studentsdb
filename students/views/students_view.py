@@ -84,10 +84,11 @@ def delete_students_view(request):
     students = Student.objects.filter(delete_or_not=True)
     
     if(request.POST):
-        try:
+        try:           
             for student in students:
                 student.delete()
-            messages.success(request, u'Студенти були успішно видалені')            
+            messages.success(request, u'Студенти були успішно видалені')  
+                  
         except Exception:
             messages.success(request, u'Виникла помилка при видаленні студентів') 
         finally:
