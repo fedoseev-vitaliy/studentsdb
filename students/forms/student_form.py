@@ -45,10 +45,10 @@ class StudentAddForm(ModelForm):
     def __init__(self, *args, **kwargs):
         #call origin initializator
         super(StudentAddForm, self).__init__(*args, **kwargs)
-          
+                  
         #init FormHelper 
-        self.helper = FormHelper(self)
-                 
+        self.helper = FormHelper(self)        
+        
         #form tag attributes
         self.helper.form_class = 'form-horizontal'
         self.helper.form_method = 'post'        
@@ -63,4 +63,7 @@ class StudentAddForm(ModelForm):
         self.helper.layout.append(FormActions(
                                     Submit('add_button', u'Додати', css_class="btn btn-primary"),
                                     Submit('cancel_button', u'Скасувати', css_class="btn btn-link"),
-                                    ))          
+                                    ))    
+    
+    def clean(self):
+        return True
