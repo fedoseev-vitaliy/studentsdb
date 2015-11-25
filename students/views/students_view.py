@@ -8,10 +8,19 @@ from django.contrib import messages
 from django.views.generic import UpdateView, DeleteView
 from students.forms import student_form
 from django.views.generic.edit import CreateView
+from django.views.decorators.csrf import ensure_csrf_cookie
+import json
 
 # Students Views
+@ensure_csrf_cookie
 def students_list(request):
     students = Student.objects.all()
+    
+    if(request.POST and request.is_ajax()):
+        std = Student.objects.get(pk=request.POST['student_id'])
+        std.delete_or_not = json.loads(request.POST['checkbox_value'])
+        std.save()
+        
     
     #try to order students list
     order_by = request.GET.get('order_by', '')
@@ -70,12 +79,33 @@ class StudentsAddView(CreateView):
             return CreateView.post(self, request, *args, **kwargs)
 
 
+def delete_students_view(request):
+    template_name = 'forms/students_delete_form.html'
+    students = Student.objects.filter(delete_or_not=True)
+    
+    if(request.POST):
+        try:
+            for student in students:
+                student.delete()
+            messages.success(request, u'Студенти були успішно видалені')            
+        except Exception:
+            messages.success(request, u'Виникла помилка при видаленні студентів') 
+        finally:
+            return HttpResponseRedirect(reverse('home'))
+    else:
+        return render(request, template_name, {'students': students})
+
+
 class StudentsDeleteView(DeleteView):
     model = Student
     template_name = 'forms/students_delete_form.html'
-    pk_url_kwarg = 'sid' 
+    #pk_url_kwarg = 'sid' 
     
     def get_success_url(self):
         messages.success(self.request, u'Студента успішно видалено!')
         return reverse('home')
+    
+    def get_queryset(self):
+        query = Student.objects.filter(delete_or_not=True)
+        return query
 

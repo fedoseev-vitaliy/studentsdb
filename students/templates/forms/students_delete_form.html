@@ -6,10 +6,13 @@
 {% block title %}<h2>Видалення Студента</h2>{% endblock title %}
 
 {% block content %}	
-	<form action="{% url 'students_delete' object.id %}" method="post">
+	<form action="{% url 'students_delete' %}" method="post">
 		{% csrf_token %}
-		<p>Ви дійсно хочете видалити студента "{{ object }}"?</p>
-		<input type="submit" value="Так" name="delete_buttob" class="btn btn-danger"/></br></br>
+		<p>Ви дійсно хочете видалити наступних студентів?</p>
+		{% for student in students %}
+			<p>{{ student.first_name}} {{ student.last_name }}</p>
+		{% endfor %}
+		<input type="submit" value="Так" name="delete_button" class="btn btn-danger"/></br></br>
 	</form>
 	<br>
 {% endblock content %}

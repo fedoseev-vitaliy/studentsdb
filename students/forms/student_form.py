@@ -64,6 +64,3 @@ class StudentAddForm(ModelForm):
                                     Submit('add_button', u'Додати', css_class="btn btn-primary"),
                                     Submit('cancel_button', u'Скасувати', css_class="btn btn-link"),
                                     ))    
-    
-    def clean(self):
-        return True

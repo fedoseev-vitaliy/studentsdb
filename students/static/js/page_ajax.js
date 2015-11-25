@@ -1,15 +1,55 @@
 $(document).ready(function(){
 	var curr_page;
 	var page = getUrlParameter('page') !== undefined ? getUrlParameter('page') : "";
-			  
+	var order_by = getUrlParameter('order_by') !== undefined ? getUrlParameter('order_by') : "";
+	var reverse = getUrlParameter('reverse') !== undefined ? getUrlParameter('reverse') : "";
+	
 	if (page == "")	page = 1;
 	curr_page = parseInt(page)
 	
+	$(document).on('change', '.checkbox_delete_or_not', function(){		
+		var value = $(this)[0].checked;
+		var url = $(location).attr('origin');		
+		var id = $(this)[0].attributes['student_id'].value;
+		
+		function getCookie(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie != '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = jQuery.trim(cookies[i]);
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+		}
+		var csrftoken = getCookie('csrftoken');
+
+		function csrfSafeMethod(method) {
+		    // these HTTP methods do not require CSRF protection
+		    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+		}
+		
+		$.ajaxSetup({
+		    beforeSend: function(xhr, settings) {
+		        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+		            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+		        }
+		    }
+		});
+		
+		$.post(url, {"checkbox_value": value, 
+				     "student_id": id,}
+				);							
+	});
+	
 	$(document).scroll(function(){		
 		if (isScrolledIntoView($('#footer'))){
-			curr_page += 1;
-			var order_by = getUrlParameter('order_by') !== undefined ? getUrlParameter('order_by') : "";
-			var reverse = getUrlParameter('reverse') !== undefined ? getUrlParameter('reverse') : "";
+			curr_page += 1;			
 			
 			var url = $(location).attr('origin');
 			var requested_url = url + '/?page=' + curr_page + '&order_by=' + order_by + '&reverse=' + reverse;
@@ -27,6 +67,7 @@ $(document).ready(function(){
 						if (parsed_html[tr] !== undefined){
 							var tr_item = parsed_html[tr].outerHTML;
 							$tbody.append($(tr_item).hide().fadeIn(2000));
+							$(document).trigger('ready');
 						}
 						
 					}
@@ -69,5 +110,5 @@ $(document).ready(function(){
 	    var elemBottom = elemTop + $elem.height();
 
 	    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
-	}
+	};
 });

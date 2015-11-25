@@ -17,6 +17,7 @@ class Student(models.Model):
     ticket = models.CharField(max_length=256, blank=False, verbose_name=u'Білет')
     notes = models.TextField(blank=True, verbose_name=u'Нотатки')
     student_group = models.ForeignKey('Groups', verbose_name=u'Група', blank=False, null=True, on_delete=models.PROTECT)
-        
+    delete_or_not = models.BooleanField(blank=True, default=False, verbose_name=u'Видалити?')
+    
     def __unicode__(self):
             return u"%s %s" % (self.first_name, self.last_name)
