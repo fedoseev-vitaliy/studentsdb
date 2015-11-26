@@ -13,33 +13,51 @@ import json
 
 # Students Views
 @ensure_csrf_cookie
-def students_list(request):
+def students_list(request):    
     students = Student.objects.all()
     
     if(request.POST and request.is_ajax()):
-        std = Student.objects.get(pk=request.POST['student_id'])
+        std = Student.objects.get(pk=request.POST['checkbox_id'])
         std.delete_or_not = json.loads(request.POST['checkbox_value'])
         std.save()
-        
+    else:
+        Student.objects.update(delete_or_not=False)
     
-    #try to order students list
-    order_by = request.GET.get('order_by', '')
-    if order_by in ('first_name', 'last_name', 'ticket', 'pk'):
-        students = students.order_by(order_by)
-        if request.GET.get('reverse', '') == '1':
-            students = students.reverse()
-    
-    #paginate students
-    paginator = MyPaginator(students, 10)
-    page = request.GET.get('page')
-    try:
-        students = paginator.page(page)
-    except PageNotAnInteger:
-        students = paginator.page(1)
-    except EmptyPage:
-        students = paginator.page(paginator.page_num)
+        #try to order students list
+        order_by = request.GET.get('order_by', '')
+        if order_by in ('first_name', 'last_name', 'ticket', 'pk'):
+            students = students.order_by(order_by)
+            if request.GET.get('reverse', '') == '1':
+                students = students.reverse()
         
-    return render(request, 'students/students_list.html', {'students' : students})
+        #paginate students
+        paginator = MyPaginator(students, 10)
+        page = request.GET.get('page')
+        try:
+            students = paginator.page(page)
+        except PageNotAnInteger:
+            students = paginator.page(1)
+        except EmptyPage:
+            students = paginator.page(paginator.page_num)
+            
+        return render(request, 'students/students_list.html', {'students' : students})
+
+
+def delete_multiple_students_view(request):
+    template_name = 'forms/students_delete_form.html'
+    students = Student.objects.filter(delete_or_not=True)
+    
+    if(request.POST):
+        try:           
+            students.delete()
+            messages.success(request, u'Студенти були успішно видалені')  
+                  
+        except Exception:
+            messages.error(request, u'Виникла помилка при видаленні студентів') 
+        finally:
+            return HttpResponseRedirect(reverse('home'))
+    else:
+        return render(request, template_name, {'students': students})
 
 
 class StudentUpdateView(UpdateView):
@@ -79,34 +97,12 @@ class StudentsAddView(CreateView):
             return CreateView.post(self, request, *args, **kwargs)
 
 
-def delete_students_view(request):
-    template_name = 'forms/students_delete_form.html'
-    students = Student.objects.filter(delete_or_not=True)
-    
-    if(request.POST):
-        try:           
-            for student in students:
-                student.delete()
-            messages.success(request, u'Студенти були успішно видалені')  
-                  
-        except Exception:
-            messages.success(request, u'Виникла помилка при видаленні студентів') 
-        finally:
-            return HttpResponseRedirect(reverse('home'))
-    else:
-        return render(request, template_name, {'students': students})
-
-
-class StudentsDeleteView(DeleteView):
+class StudentDeleteView(DeleteView):
     model = Student
-    template_name = 'forms/students_delete_form.html'
-    #pk_url_kwarg = 'sid' 
+    template_name = 'forms/student_delete_form.html'
+    pk_url_kwarg = 'sid' 
+    context_object_name = 'student'
     
     def get_success_url(self):
         messages.success(self.request, u'Студента успішно видалено!')
         return reverse('home')
-    
-    def get_queryset(self):
-        query = Student.objects.filter(delete_or_not=True)
-        return query
-

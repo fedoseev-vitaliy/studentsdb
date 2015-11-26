@@ -14,6 +14,7 @@ class Groups(models.Model):
     title = models.CharField(max_length=256, blank=False, verbose_name=u'Групи')
     leader = models.OneToOneField(Student, verbose_name = u'Староста', blank=True, null=True, on_delete=models.SET_NULL)    
     notes = models.TextField(blank=True, verbose_name=u'Нотатки')
+    delete_or_not = models.BooleanField(blank=True, default=False, verbose_name=u'Видалити?')
         
     def __unicode__(self):
         return u'%s' % (self.title)            

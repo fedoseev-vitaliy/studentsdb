@@ -5,17 +5,17 @@
 {% block title %}<h2>Видалення Студента</h2>{% endblock title %}
 
 {% block content %}	
-	{% if students %}
-		<form action="{% url 'students_delete' %}" method="post">
+	{% if groups %}
+		<form action="{% url 'groups_delete' %}" method="post">
 			{% csrf_token %}		
-			<p>Ви дійсно хочете видалити наступних студентів?</p>
-			{% for student in students %}
-				<p>{{ student.first_name}} {{ student.last_name }}</p>
+			<p>Ви дійсно хочете видалити наступниі групи?</p>
+			{% for group in groups %}
+				<p>{{ group.title }}</p>
 			{% endfor %}
 			<input type="submit" value="Так" name="delete_button" class="btn btn-danger"/></br></br>
 		</form>
 	{% else %}
-		<p>Жодного студента не вибрано!</p>
+		<p>Жодної групи не вибрано!</p>
 	{% endif %}
 	<br>
 {% endblock content %}

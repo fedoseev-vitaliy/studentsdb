@@ -27,9 +27,9 @@ class ContactAdminForm(forms.Form):
         #form submit button
         self.helper.add_input(Submit('send_button', u'Надіслати'))        
     
-    from_email = forms.EmailField(label=u"Ваша Емейл Адреса")
-    subject = forms.CharField(label=u"Заголовок листа", max_length=128)
-    message = forms.CharField(label=u"Текст повідомлення", widget=forms.Textarea)
+    from_email = forms.EmailField(label=u"електронна адреса")
+    subject = forms.CharField(label=u"заголовок", max_length=128)
+    message = forms.CharField(label=u"текст повідомлення", widget=forms.Textarea)
     
     #method to send email to adimn team
     def send_email(self):

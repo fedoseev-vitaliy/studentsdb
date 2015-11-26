@@ -6,7 +6,7 @@ from crispy_forms.bootstrap import FormActions
 from django.core.urlresolvers import reverse
 from ..models.student import Student
 
-student_fields = ['first_name', 'middle_name', 'last_name', 'birth_day', 'photo', 'ticket', 'notes'] 
+student_fields = ['first_name', 'middle_name', 'last_name', 'birth_day', 'photo', 'ticket', 'student_group', 'notes'] 
 
 class StudentUpdateForm(ModelForm):
     class Meta:

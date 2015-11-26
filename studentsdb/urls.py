@@ -10,16 +10,17 @@ urlpatterns = [
     #Students url
     url(r'^$', students_view.students_list, name='home'),
     url(r'^students/add/$', students_view.StudentsAddView.as_view(), name='students_add'),
-    url(r'^students/delete/$', students_view.delete_students_view, name='students_delete'),
+    url(r'^students/delete/$', students_view.delete_multiple_students_view, name='students_delete'),
     url(r'^students/(?P<sid>\d+)/edit/$', students_view.StudentUpdateView.as_view(), name='students_edit'),
-    #url(r'^students/(?P<sid>\d+)/delete/$', students_view.StudentsDeleteView.as_view(), name='student_delete'),
+    url(r'^students/(?P<sid>\d+)/delete/$', students_view.StudentDeleteView.as_view(), name='student_delete'),
     
     
     #Group url    
     url(r'^groups/$', groups_view.groups_list, name='groups'),  
-    url(r'^groups/add/$', groups_view.groups_add, name='groups_add'),
-    url(r'^groups/(?P<sid>\d+)/edit/$', groups_view.groups_edit, name='groups_edit'),
-    url(r'^groups/(?P<sid>\d+)/delete/$', groups_view.groups_delete, name='groups_delete'),
+    url(r'^groups/add/$', groups_view.AddGroupView.as_view(), name='groups_add'),
+    url(r'^groups/delete/$', groups_view.delete_multiple_groups, name='groups_delete'),
+    url(r'^groups/(?P<sid>\d+)/edit/$', groups_view.EditGroupView.as_view(), name='groups_edit'),
+    url(r'^groups/(?P<sid>\d+)/delete/$', groups_view.DeleteGroupView.as_view(), name='group_delete'),
     
     
     # Journal url
