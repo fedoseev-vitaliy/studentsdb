@@ -17,7 +17,7 @@ urlpatterns = [
     
     #Group url    
     url(r'^groups/$', groups_view.groups_list, name='groups'),  
-    url(r'^groups/add/$', groups_view.AddGroupView.as_view(), name='groups_add'),
+    url(r'^groups/add/$', groups_view.AddGroupView.as_view(), name='groups_add'),    
     url(r'^groups/delete/$', groups_view.delete_multiple_groups, name='groups_delete'),
     url(r'^groups/(?P<sid>\d+)/edit/$', groups_view.EditGroupView.as_view(), name='groups_edit'),
     url(r'^groups/(?P<sid>\d+)/delete/$', groups_view.DeleteGroupView.as_view(), name='group_delete'),
@@ -31,7 +31,8 @@ urlpatterns = [
     
     # Exam url
     url(r'^exam/$', examination_view.exam_list, name="exams"),    
-    url(r'^exam/group/(?P<sid>\d+)/view/$', examination_view.exam_group_result, name="group_result"),
+    url(r'^exam/add/$', examination_view.ExamAddView.as_view(), name="exam_add"), 
+    url(r'^exam/group/(?P<sid>\d+)/result/$', examination_view.exam_group_result, name="group_result"),
     
     # Contact admin url
     url(r'^contact/$', contact_admin.ContacAdminView.as_view(), name="contact_admin"),

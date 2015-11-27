@@ -5,7 +5,7 @@ $(document).ready(function(){
 	var reverse = getUrlParameter('reverse') !== undefined ? getUrlParameter('reverse') : "";
 	
 	if (page == "")	page = 1;
-	curr_page = parseInt(page)		
+	curr_page = parseInt(page);			
 	
 	$(document).on('change', '.checkbox_delete_or_not', function(){		
 		var value = $(this)[0].checked;

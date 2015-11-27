@@ -9,6 +9,10 @@
 		<div class="col-xs-10">	
 			<h2>База Іспитів</h2>
 		</div>		
+		<!-- Add Students Button -->
+		<div class="col-xs-2">
+			<a class="btn btn-primary" href="{% url 'exam_add' %}">Додати Іспит</a>	
+		</div>
 	</div>	
 {% endblock title %}
 
@@ -68,8 +72,8 @@
 						<td>{{ exam.id }}</td>
 						<td>{{ exam.exam_name }}</td>
 						<td>{{ exam.exam_date }}</td>
-						<td>{{ exam.teacher_name }}</td>
-						<td><a href={% url 'group_result' exam.student_group.id %}>{{ exam.student_group }}</a></td>						
+						<td>{{ exam.teacher_name }}</td>						
+						<td><a href='#'>{{ exam.student_group }}</a></td>												
 					</tr>
 				{% endfor %}
 				</tbody>

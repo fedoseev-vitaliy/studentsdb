@@ -19,5 +19,7 @@
 
 {% block content %}	
 	{% crispy form %}	
-	<br>
+	<br><br>
 {% endblock content %}
+
+{% block extra_js %}<script src="{{ PORTAL_URL }}{% static 'js/form_widgets.js' %}"></script>{% endblock extra_js %}

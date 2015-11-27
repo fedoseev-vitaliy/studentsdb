@@ -1,0 +1,32 @@
+{% extends "students/base.html"%}
+
+{% block meta_title %}Групи{% endblock meta_title %}
+
+{% block title %}<h2>Додавання Групи</h2>{% endblock title %}
+
+{% block content %}
+	<form method='post' action={% url 'groups_add' %} enctype="multipart/form-data">
+		<div>
+			<label for="title">Назва Групи</label>
+			<input value=""	name="title" id="title" />
+		</div>
+		
+		<div>
+			<label for="leader" name="leader">Староста</label>
+			<select name="leader" id="leader">
+				<option value="">Староста1</option>
+				<option value="">Староста2</option>
+			</select>
+		</div>
+		
+		<div>
+			<label for="notes">Нотатки</label>
+			<input value="" name="notes" id="notes" />
+		</div>
+		
+		<div>
+			<input type="submit" value="Додати" name="add_button" />
+			<button type="submit" name="cancel_button">Скасувати</button>
+		</div>
+	</form>
+{% endblock content %}

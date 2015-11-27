@@ -1,29 +1,26 @@
 # -*- coding: utf-8 -*-
 from django.forms import ModelForm
+from django.forms.widgets import Select
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from crispy_forms.bootstrap import FormActions
 from django.core.urlresolvers import reverse
-from ..models.student import Student
-from django.forms.widgets import DateInput
+from ..models.group import Groups
 
 
-class StudentUpdateForm(ModelForm):
+class GroupUpdateForm(ModelForm):
     class Meta:
-        model = Student       
+        model = Groups       
         exclude = ['delete_or_not']
-        widgets = {
-            'birth_day': DateInput(attrs={'id': 'datepicker'}),            
-            }
         
     def __init__(self, *args, **kwargs):
         #call origin initializator
-        super(StudentUpdateForm, self).__init__(*args, **kwargs)
+        super(GroupUpdateForm, self).__init__(*args, **kwargs)
           
         #init FormHelper 
         self.helper = FormHelper(self)
         # set form tag attributes
-        self.helper.form_action = reverse('students_edit', kwargs={'sid': kwargs['instance'].id})  
+        self.helper.form_action = reverse('groups_edit', kwargs={'sid': kwargs['instance'].id})  
         #form tag attributes
         self.helper.form_class = 'form-horizontal'
         self.helper.form_method = 'post'        
@@ -41,17 +38,18 @@ class StudentUpdateForm(ModelForm):
                                     css_class="col-sm-offset-2 col-sm-10",
                                     )) 
         
-class StudentAddForm(ModelForm):
+class GroupAddForm(ModelForm):
     class Meta:
-        model = Student       
+        model = Groups              
         exclude = ['delete_or_not']
         widgets = {
-            'birth_day': DateInput(attrs={'id': 'datepicker'}),            
-            }
+                   'leader': Select(choices=('one', 'two'))
+                   }
+        
         
     def __init__(self, *args, **kwargs):
         #call origin initializator
-        super(StudentAddForm, self).__init__(*args, **kwargs)
+        super(GroupAddForm, self).__init__(*args, **kwargs)
                   
         #init FormHelper 
         self.helper = FormHelper(self)        
@@ -59,7 +57,7 @@ class StudentAddForm(ModelForm):
         #form tag attributes
         self.helper.form_class = 'form-horizontal'
         self.helper.form_method = 'post'        
-        self.helper.form_action = reverse('students_add')  
+        self.helper.form_action = reverse('groups_add')  
         #twitter bootstrap style
         self.helper.help_text_inline = True
         self.helper.html5_required = True
@@ -71,4 +69,4 @@ class StudentAddForm(ModelForm):
                                     Submit('add_button', u'Додати', css_class="btn btn-primary"),
                                     Submit('cancel_button', u'Скасувати', css_class="btn btn-link"),
                                     css_class="col-sm-offset-2 col-sm-10",
-                                    ))    
+                                    ))
